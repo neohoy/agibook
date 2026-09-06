@@ -115,6 +115,8 @@
 
 **入口**：[open-design.ai](https://open-design.ai/)
 
+**深入**：[OpenDesign 手册](https://neohoy.github.io/opendesignbook/)（本站作者写的非官方手册，主线是十步做出一份可编辑的 AI PPT）
+
 ::: tip 注意它和上一章那些工具的关系
 OpenDesign 不是"另一个 Agent"，**它是给你已有 Agent 加的一层**。所以它和 [02 章](./02-general)那些工具不是二选一，是叠加。
 
@@ -129,7 +131,7 @@ OpenDesign 不是"另一个 Agent"，**它是给你已有 Agent 加的一层**�
 | 语音 | [ElevenLabs](https://elevenlabs.io/) 等 | 文字 → 配音；声音克隆 |
 | 数字人 | [HeyGen](https://www.heygen.com/) | 文案 → 有人出镜的视频 |
 | AI 短剧 / 视频 | [Flova](https://flova.ai/) · [LibTV](https://www.liblib.tv/) | 封装好的成片流水线，聚合多家视频模型 |
-| 前端 / 设计 | [OpenDesign](https://open-design.ai/) | 给你已有的 Agent 加一层设计流程 |
+| 前端 / 设计 | [OpenDesign](https://open-design.ai/)（[手册](https://neohoy.github.io/opendesignbook/)） | 给你已有的 Agent 加一层设计流程 |
 
 ## 一条通用的判断
 

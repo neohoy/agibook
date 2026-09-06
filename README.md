@@ -7,6 +7,16 @@
 
 写作原则：**不写会过期的东西**（版本号、价格、上下文窗口的确切数字、模型排行榜一律不写死），只写不会过时的部分。
 
+## 同作者的工具手册
+
+这本书讲**方法**，下面几本讲**某一个工具怎么用**，[工具篇](docs/tools/)里有对应的链接：
+
+[Claude Code 中文教程](https://claudebook-e38.pages.dev/) ·
+[Codex 中文手册](https://neohoy.github.io/codexbook/) ·
+[豆包工作手册](https://neohoy.github.io/doubaobook/) ·
+[WorkBuddy 手册](https://neohoy.github.io/workbuddybook/) ·
+[OpenDesign 手册](https://neohoy.github.io/opendesignbook/)
+
 ## 本地开发
 
 ```bash

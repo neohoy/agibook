@@ -40,7 +40,23 @@
 
 本书把它当作"形状"来讲，而不是当作某一家的产品说明：[09 章](../skill/09-platforms)给了各家形态的对照表，正文写法在哪家都通用。**具体字段限制和路径以你所用工具的官方文档为准。**
 
-### 四、实际使用记录
+### 四、同作者的几本工具手册
+
+[工具篇](../tools/)里关于 WorkBuddy、OpenDesign、豆包工作、Codex、Claude Code 的描述，部分取自本站作者为这几个工具单独写的手册：
+
+| 手册 | 讲什么 |
+| --- | --- |
+| [Claude Code 中文教程](https://claudebook-e38.pages.dev/) | 官方文档重新编排的学习路径 · 简 / 繁 / 英 |
+| [Codex 中文手册](https://neohoy.github.io/codexbook/) | 从装上 CLI 到交给 CI · 含官方中文文档镜像 |
+| [豆包工作手册](https://neohoy.github.io/doubaobook/) | 界面、技能、连接器、云电脑与飞书打通 |
+| [WorkBuddy 手册](https://neohoy.github.io/workbuddybook/) | 三种工作模式、权限沙箱 · 12 个实战案例 |
+| [OpenDesign 手册](https://neohoy.github.io/opendesignbook/) | 安装、接本地 Agent、设计系统 · 十步做一份可编辑 AI PPT |
+
+**分工**：这本书讲**方法**（换到哪个工具都成立），那几本讲**某一个工具怎么用**（菜单在哪、开关什么意思、这个工具特有的坑）。
+
+它们同样是非官方社区教程，产品功能以各家官方最新说明为准。
+
+### 五、实际使用记录
 
 Token 估算、上下文表现、幻觉高发场景这些经验性的判断，来自日常使用中的观察。**它们是经验，不是实验数据**——遇到和你的实测不一致的地方，以你自己跑出来的为准。
 

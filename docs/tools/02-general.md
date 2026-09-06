@@ -18,6 +18,8 @@
 
 **入口**：[claude.com/product/claude-code](https://claude.com/product/claude-code) · [文档](https://code.claude.com/docs)
 
+**深入**：[Claude Code 中文教程](https://claudebook-e38.pages.dev/)（本站作者写的非官方手册，官方文档重新编排的学习路径，简 / 繁 / 英三语）
+
 ---
 
 ### Codex · OpenAI
@@ -29,6 +31,8 @@
 **给谁**：写代码的；已经在用 ChatGPT 订阅、不想再开一份账的人。
 
 **入口**：[developers.openai.com/codex](https://developers.openai.com/codex/)
+
+**深入**：[Codex 中文手册](https://neohoy.github.io/codexbook/)（本站作者写的非官方手册，从装上 CLI 到交给 CI，外加官方中文文档镜像）
 
 ---
 
@@ -103,6 +107,8 @@
 
 **入口**：[doubao.com](https://www.doubao.com/chat/)
 
+**深入**：[豆包工作手册](https://neohoy.github.io/doubaobook/)（本站作者写的非官方手册，界面、技能、连接器、云电脑与飞书打通）
+
 ---
 
 ### WorkBuddy · 腾讯
@@ -116,6 +122,8 @@
 **给谁**：非技术岗但活主要落在本地文件上的人（大量文档、素材、报表要处理）。
 
 **入口**：[workbuddy.cn](https://www.workbuddy.cn/)
+
+**深入**：[WorkBuddy 手册](https://neohoy.github.io/workbuddybook/)（本站作者写的非官方手册，三种工作模式、权限沙箱、12 个实战案例）
 
 ---
 
@@ -143,6 +151,10 @@
 | **Qoder** | 阿里 | 桌面 IDE | 开发 | 项目级自主开发 |
 | **豆包** | 字节 | 桌面客户端 | **非技术岗** | 门槛最低 |
 | **WorkBuddy** | 腾讯 | 桌面 Agent | **非技术岗** | 说一句话把本地的活干完 |
+
+::: tip 上面四个有配套的单独手册
+[Claude Code](https://claudebook-e38.pages.dev/) · [Codex](https://neohoy.github.io/codexbook/) · [豆包工作](https://neohoy.github.io/doubaobook/) · [WorkBuddy](https://neohoy.github.io/workbuddybook/)。都是非官方社区教程，选定工具之后再去翻。
+:::
 
 <div class="ab-do">
 
