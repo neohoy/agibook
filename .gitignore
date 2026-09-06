@@ -1,0 +1,8 @@
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+docs/zh-TW/
+docs/.vitepress/theme/home-data.zh-TW.mjs
+.DS_Store
+*.log
+.cache/

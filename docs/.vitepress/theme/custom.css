@@ -1,0 +1,522 @@
+/* ===========================================================
+   大模型手册 · 主题
+   =========================================================== */
+
+:root {
+  /* 主色沿用讲义那套青绿：底色偏冷，重点色只有一个，避免整页花掉 */
+  --ab-teal-50: #eef7f6;
+  --ab-teal-100: #e4f1f0;
+  --ab-teal-300: #4fbdb9;
+  --ab-teal-400: #23a09d;
+  --ab-teal-500: #0e7c7b;
+  --ab-teal-600: #0a6968;
+  --ab-teal-700: #0a5453;
+  --ab-amber: #a9742a;
+  --ab-coral: #c0503a;
+  --ab-ink: #16191f;
+
+  --vp-c-brand-1: var(--ab-teal-500);
+  --vp-c-brand-2: var(--ab-teal-600);
+  --vp-c-brand-3: var(--ab-teal-600);
+  --vp-c-brand-soft: rgba(14, 124, 123, 0.14);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    100deg,
+    var(--ab-teal-700) 0%,
+    var(--ab-teal-500) 54%,
+    var(--ab-teal-300) 100%
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    rgba(79, 189, 185, 0.5),
+    rgba(14, 124, 123, 0.42)
+  );
+  --vp-home-hero-image-filter: blur(56px);
+
+  --vp-button-brand-bg: var(--ab-teal-500);
+  --vp-button-brand-hover-bg: var(--ab-teal-600);
+  --vp-button-brand-active-bg: var(--ab-teal-700);
+
+  --vp-layout-max-width: 1520px;
+}
+
+.dark {
+  --vp-c-brand-1: var(--ab-teal-300);
+  --vp-c-brand-2: var(--ab-teal-400);
+  --vp-c-brand-3: var(--ab-teal-400);
+  --vp-c-brand-soft: rgba(79, 189, 185, 0.18);
+  --vp-home-hero-image-filter: blur(64px);
+
+  --vp-button-brand-bg: var(--ab-teal-400);
+  --vp-button-brand-hover-bg: var(--ab-teal-300);
+  --vp-button-brand-active-bg: var(--ab-teal-300);
+  --vp-button-brand-text: #06201f;
+}
+
+/* ---------- 排版：中文阅读优化 ---------- */
+.vp-doc {
+  line-height: 1.85;
+}
+.vp-doc p,
+.vp-doc li {
+  letter-spacing: 0.01em;
+}
+.vp-doc h2 {
+  margin-top: 46px;
+  padding-top: 22px;
+  letter-spacing: -0.01em;
+}
+.vp-doc h3 {
+  margin-top: 30px;
+}
+/* 宽屏铺满，窄屏退回可横向滚动的块级表格，避免撑破页面 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .vp-doc table {
+    display: block;
+    overflow-x: auto;
+    width: max-content;
+    max-width: 100%;
+  }
+}
+.vp-doc th,
+.vp-doc td {
+  vertical-align: top;
+}
+.vp-doc blockquote {
+  border-left-color: var(--ab-teal-300);
+}
+
+/* ---------- 提示词代码块：可读的长中文 ---------- */
+.vp-doc div[class*='language-'] code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+/* 提示词是本书最常被整段复制的东西，给它一条可辨认的左边线 */
+.vp-doc div[class*='language-text'] {
+  border-left: 3px solid var(--vp-c-brand-1);
+}
+
+/* ===========================================================
+   正文里的两个自定义块
+   =========================================================== */
+
+/* 一句话定义：每个概念页开头那一行，读者只记这一句也不亏 */
+.ab-def {
+  margin: 0 0 28px;
+  padding: 18px 22px;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-radius: 0 12px 12px 0;
+  background: var(--vp-c-bg-soft);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.ab-def strong {
+  color: var(--vp-c-brand-1);
+}
+
+/* 「所以你该怎么做」：讲义里每个概念后面都跟一条动作，正文沿用 */
+.vp-doc .ab-do {
+  margin: 24px 0;
+  padding: 16px 20px 16px 18px;
+  border-radius: 12px;
+  background: var(--vp-c-brand-soft);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.vp-doc .ab-do p {
+  margin: 0;
+}
+.vp-doc .ab-do p + p {
+  margin-top: 8px;
+}
+.vp-doc .ab-do::before {
+  content: '所以你该怎么做';
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 8px;
+}
+
+/* ===========================================================
+   首页自定义版块
+   =========================================================== */
+.ab-home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+
+.ab-section {
+  margin-top: 88px;
+}
+
+.ab-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vp-c-brand-1);
+  margin: 0 0 12px;
+}
+
+.ab-section h2 {
+  font-size: 30px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  border: 0;
+  padding: 0;
+}
+
+.ab-section .ab-lede {
+  margin: 0 0 32px;
+  color: var(--vp-c-text-2);
+  font-size: 15px;
+  max-width: 62ch;
+  line-height: 1.75;
+}
+
+/* ---------- 数据条 ---------- */
+.ab-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 64px;
+}
+.ab-stat {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 20px 22px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-stat b {
+  display: block;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--vp-c-text-1);
+  font-variant-numeric: tabular-nums;
+}
+.ab-stat span {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+
+/* ---------- 阅读路线卡 ---------- */
+/* 四篇 → 桌面 2×2，卡片有地方放那四条要点 */
+.ab-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.ab-path {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  padding: 26px 24px 22px;
+  background: var(--vp-c-bg-soft);
+  transition: border-color 0.24s, transform 0.24s, box-shadow 0.24s;
+}
+/* 篇数为奇数时，最后一张卡片跨满整行，避免末行留一个孤儿 */
+.ab-path:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+.ab-path:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -18px rgba(14, 124, 123, 0.55);
+}
+.ab-path-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  margin-bottom: 14px;
+}
+.ab-path h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+.ab-path > p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+.ab-path ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  flex: 1;
+}
+.ab-path li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 2;
+  color: var(--vp-c-text-2);
+}
+.ab-path li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 13px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+}
+.ab-path-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+.ab-path-link:hover {
+  text-decoration: underline;
+}
+.ab-path-note {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px dashed var(--vp-c-divider);
+  font-size: 12.5px;
+  color: var(--vp-c-text-3);
+}
+
+/* ---------- 问题入口网格 ---------- */
+.ab-tasks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.ab-task {
+  display: block;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 18px 20px;
+  text-decoration: none;
+  background: var(--vp-c-bg);
+  transition: border-color 0.2s, background 0.2s;
+}
+.ab-task:hover {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+}
+.ab-task strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--vp-c-text-1);
+  margin-bottom: 4px;
+}
+.ab-task span {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+  line-height: 1.6;
+}
+
+/* ---------- 四阶段流程条 ---------- */
+.ab-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  counter-reset: ab-flow;
+}
+.ab-flow-step {
+  position: relative;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 22px 20px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-flow-step::before {
+  counter-increment: ab-flow;
+  content: '0' counter(ab-flow);
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.ab-flow-step h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 650;
+}
+.ab-flow-step p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+.ab-flow-step .ab-flow-terms {
+  display: block;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--vp-c-divider);
+  font-size: 12.5px;
+  color: var(--vp-c-text-3);
+}
+
+/* ---------- 来源列表 ---------- */
+.ab-sources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.ab-source {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.ab-source:hover {
+  border-color: var(--vp-c-brand-1);
+}
+.ab-source em {
+  flex: none;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--vp-c-text-3);
+  font-variant-numeric: tabular-nums;
+}
+.ab-source-body strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  line-height: 1.5;
+}
+.ab-source-body span {
+  font-size: 12.5px;
+  color: var(--vp-c-text-3);
+}
+
+/* ---------- 结尾提示 ---------- */
+.ab-outro {
+  margin-top: 80px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 18px;
+  padding: 38px 34px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(14, 124, 123, 0.12), transparent 60%),
+    var(--vp-c-bg-soft);
+}
+.ab-outro h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  border: 0;
+  padding: 0;
+}
+.ab-outro p {
+  margin: 0 0 20px;
+  color: var(--vp-c-text-2);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 64ch;
+}
+.ab-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: var(--ab-teal-500);
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.ab-btn:hover {
+  background: var(--ab-teal-700);
+}
+.ab-btn-ghost {
+  background: transparent;
+  color: var(--vp-c-text-1) !important;
+  border: 1px solid var(--vp-c-divider);
+  margin-left: 10px;
+}
+.ab-btn-ghost:hover {
+  background: var(--vp-c-bg);
+  border-color: var(--vp-c-brand-1);
+}
+
+/* ---------- 站点说明条 ---------- */
+.ab-locale-note {
+  margin: 0 0 40px;
+  padding: 14px 18px;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-radius: 0 10px 10px 0;
+  background: var(--vp-c-bg-soft);
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--vp-c-text-2);
+}
+.ab-locale-note strong {
+  color: var(--vp-c-text-1);
+  font-weight: 650;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 960px) {
+  .ab-tasks,
+  .ab-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ab-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .ab-home {
+    padding: 0 20px 72px;
+  }
+  .ab-section {
+    margin-top: 64px;
+  }
+  .ab-section h2 {
+    font-size: 24px;
+  }
+  .ab-paths,
+  .ab-tasks,
+  .ab-flow,
+  .ab-sources,
+  .ab-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ab-outro {
+    padding: 28px 22px;
+  }
+  .ab-btn-ghost {
+    margin: 10px 0 0;
+    display: block;
+    text-align: center;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "agibook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "大模型手册 · 通用大模型入门教程 · 简体 / 繁體",
+  "type": "module",
+  "scripts": {
+    "i18n": "node scripts/gen-zh-tw.mjs",
+    "dev": "npm run i18n && vitepress dev docs",
+    "build": "npm run i18n && vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "opencc-js": "^1.4.2",
+    "vitepress": "^1.6.4"
+  }
+}
