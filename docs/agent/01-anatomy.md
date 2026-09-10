@@ -8,18 +8,20 @@
 
 ## 一圈的样子
 
-```text
-       你给的目标
-           ↓
-    ┌──→ ① 想：下一步该干什么
-    │        ↓
-    │    ② 调工具：搜索 / 读文件 / 跑命令 / 查数据库
-    │        ↓
-    │    ③ 看结果：拿到了什么，离目标近了没有
-    │        ↓
-    └──── ④ 判断：还没完成 → 回到 ①
-                  完成了   → 交付
-```
+<figure class="ab-fig">
+<p class="ab-dtitle">Agent 的一圈</p>
+<div class="ab-loop">
+<div class="goal">你给的目标 ↓</div>
+<div class="ring">
+<div class="ls"><span class="n">1</span><span><b>想</b><span>下一步该干什么</span></span></div>
+<div class="ls"><span class="n">2</span><span><b>调工具</b><span>搜索 / 读文件 / 跑命令 / 查数据库</span></span></div>
+<div class="ls"><span class="n">3</span><span><b>看结果</b><span>拿到了什么，离目标近了没有</span></span></div>
+<div class="ls"><span class="n">4</span><span><b>判断</b><span>还没完成 → 回到第 ① 步；完成了 → 交付</span></span></div>
+</div>
+<div class="done">↓ 交付</div>
+</div>
+<figcaption>Workflow 是你把这个圈展开成一条直线；Agent 是让它自己转</figcaption>
+</figure>
 
 就这四步，转圈。**Workflow 是你把这个圈展开成一条直线；Agent 是让它自己转，转到它认为够了为止。**
 

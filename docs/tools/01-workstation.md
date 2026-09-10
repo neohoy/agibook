@@ -8,6 +8,18 @@
 
 ## 三种形态
 
+<figure class="ab-fig">
+<p class="ab-dtitle">工具 = 套在模型外面的那层「壳」</p>
+<div class="ab-bar"><span class="k">同一台发动机</span><span class="v">大模型（GPT / Claude / Gemini / DeepSeek……）—— <b>装进不同的车，就是不同的产品</b></span></div>
+<div class="ab-down">套上不同的壳</div>
+<div class="ab-shells">
+<div class="ab-shell c1"><span class="ico">便签纸</span><span class="bd"><strong>网页 / App 聊天框</strong><span>打开就用，零门槛。适合一次性的对话——但它碰不到你电脑上的任何东西。</span></span></div>
+<div class="ab-shell c2"><span class="ico">工位</span><span class="bd"><strong>桌面 Agent 工具</strong><span>能读你的文件、能改、能跑命令，认得你的项目。非技术岗真正该待的一档。</span></span></div>
+<div class="ab-shell c3"><span class="ico">车间</span><span class="bd"><strong>编码 IDE</strong><span>整个代码库都在它眼里。手脚最多，风险也最大。</span></span></div>
+</div>
+<figcaption>选什么壳、怎么用这个壳，和用哪个模型一样重要 —— 但方法在哪个壳里都通用</figcaption>
+</figure>
+
 | | 便签纸 | 工位 | 车间 |
 | --- | --- | --- | --- |
 | **形态** | 网页 / App 聊天框 | 桌面 Agent 工具 | 编码 IDE |

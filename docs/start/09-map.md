@@ -30,6 +30,16 @@ Skill 就是把这套规矩存下来，以后一句"按我们的规范整理成�
 
 > **一件事你只干一次，Prompt 就够；一件事你每周都干，就值得做成 Skill。**
 
+<figure class="ab-fig">
+<div class="ab-grid">
+<div class="ab-c"><span class="n">01</span><span class="t">Prompt</span><span class="zh">提示词 · 当面交代的那句话</span><span class="d">你每次<b>当面交代给它的那段话</b>。说得越具体，结果越靠谱；临时的，说完就没了。</span><span class="foot">适合一次性的活</span></div>
+<div class="ab-c v2"><span class="n">02</span><span class="t">Skill</span><span class="zh">技能 · 给它一本 SOP</span><span class="d">把常用的规则和说法<b>打包存起来</b>，以后一句话触发，不用每次重讲。</span><span class="foot">适合每周都重复的固定流程</span></div>
+<div class="ab-c v3"><span class="n">03</span><span class="t">Workflow</span><span class="zh">工作流 · 给它一张流程单</span><span class="d">把步骤<b>定死</b>，它照着一步步走。慢一点，但每次都一样，错了知道停在第几步。</span><span class="foot">适合多步骤、但每次都是同样几步</span></div>
+<div class="ab-c v4"><span class="n">04</span><span class="t">Agent</span><span class="zh">代理 · 放手让它自己跑</span><span class="d">你给一个<b>目标</b>，它自己拆步骤、执行、检查、再修正——中途你插不上手。</span><span class="foot">适合事先不知道有几步的活</span></div>
+</div>
+<figcaption>越往后越省事，但顺序不能反 —— 先会交代，才谈得上放手</figcaption>
+</figure>
+
 ### Workflow —— 大多数"自动化"其实是这个
 
 真实的活很少只有一步：会开完 → 整理纪要 → 抽出待办 → 按人分组 → 生成派活消息 → 你过一眼 → 发出去。
@@ -105,15 +115,19 @@ Skill 就是把这套规矩存下来，以后一句"按我们的规范整理成�
 
 把上面所有词按"为什么会出现它"排一遍，逻辑就清楚了——**每个东西存在，都是因为上一阶段不够用**：
 
-```text
-① 跟它说话              Prompt · System Prompt
-   ↓ 说得再好，它也会忘、会编
-② 认清它的边界          Token · 上下文窗口 · 幻觉
-   ↓ 知道了边界，怎么让它真能干活
-③ 让它能干活            结构化输出 · Function Calling · RAG · 微调
-   ↓ 每一步都要你盯，太累
-④ 让它连着跑            Skill · Workflow · Agent · MCP
-```
+<figure class="ab-fig">
+<p class="ab-dtitle">四个阶段：每个东西存在，都是因为上一阶段不够用</p>
+<div class="ab-ladder">
+<div class="rung"><span class="st">①</span><span class="nm">跟它说话</span><span class="tm">Prompt · System Prompt · Few-shot</span></div>
+<div class="why">说得再好，它也会忘、会编</div>
+<div class="rung"><span class="st">②</span><span class="nm">认清它的边界</span><span class="tm">Token · 上下文窗口 · 幻觉</span></div>
+<div class="why">知道了边界，那怎么让它真能干活</div>
+<div class="rung"><span class="st">③</span><span class="nm">让它能干活</span><span class="tm">结构化输出 · Function Calling · RAG · 微调</span></div>
+<div class="why">每一步都要你盯着，太累</div>
+<div class="rung"><span class="st">④</span><span class="nm">让它连着跑</span><span class="tm">Skill · Workflow · Agent · MCP</span></div>
+</div>
+<figcaption>你现在在 ①②，并且能把 ③ 的名词对上号 —— 入门篇到此为止</figcaption>
+</figure>
 
 你现在在 ①②，并且已经能把 ③ 的名词对上号。这就够了——**入门篇到此为止**。
 

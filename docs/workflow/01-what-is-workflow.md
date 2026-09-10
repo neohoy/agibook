@@ -8,17 +8,21 @@
 
 ## 一条流水线长什么样
 
-```text
-①  一坨会议记录
-    ↓  【整理成纪要】       ← 一步 = 一个已经调稳的提示词 / Skill
-②  结构化纪要
-    ↓  【抽出待办】
-③  待办清单（事项 / 责任人 / 截止）
-    ↓  【按责任人分组，生成派活消息】
-④  几条待发的消息
-    ↓  【你过一遍】          ← 人工卡点
-⑤  发出去
-```
+<figure class="ab-fig">
+<p class="ab-dtitle">一条流水线长什么样</p>
+<div class="ab-pipe">
+<div class="p-node"><span class="num">1</span><span class="tx">一坨会议记录</span></div>
+<div class="p-act"><span class="op">整理成纪要</span><span class="hint">一步 = 一个已经调稳的提示词 / Skill</span></div>
+<div class="p-node"><span class="num">2</span><span class="tx">结构化纪要</span></div>
+<div class="p-act"><span class="op">抽出待办</span><span class="hint">产出：事项 / 责任人 / 截止</span></div>
+<div class="p-node"><span class="num">3</span><span class="tx">待办清单</span></div>
+<div class="p-act"><span class="op">按责任人分组，套模板</span><span class="hint">产出：每人一条消息</span></div>
+<div class="p-node"><span class="num">4</span><span class="tx">几条待发的消息</span></div>
+<div class="p-act human"><span class="op">你过一遍</span><span class="hint">人工卡点，几乎所有流水线都该有</span></div>
+<div class="p-node last"><span class="num">5</span><span class="tx">发出去</span></div>
+</div>
+<figcaption>每一步：明确的输入、明确的产出、明确的验收标准</figcaption>
+</figure>
 
 四步 + 一个人工卡点。每一步：**有明确的输入、明确的产出、明确的验收标准**。
 
@@ -92,34 +96,55 @@
 
 不是所有流水线都是一条直线。你会遇到的主要是这三种：
 
-**串行（最常见）**
+<figure class="ab-fig">
+<div class="ab-shapes">
 
-```text
-A → B → C
-```
+<div class="ab-shape">
+<svg viewBox="0 0 220 70" role="img" aria-label="串行：A 到 B 到 C">
+<rect class="ab-svg-box" x="6" y="24" width="46" height="26" rx="7"/><text class="ab-svg-tx" x="29" y="38">A</text>
+<path class="ab-svg-line" d="M54 37 H82" marker-end="url(#ah)"/>
+<rect class="ab-svg-box" x="86" y="24" width="46" height="26" rx="7"/><text class="ab-svg-tx" x="109" y="38">B</text>
+<path class="ab-svg-line" d="M134 37 H162" marker-end="url(#ah)"/>
+<rect class="ab-svg-box" x="166" y="24" width="46" height="26" rx="7"/><text class="ab-svg-tx" x="189" y="38">C</text>
+<defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="currentColor" opacity=".55"/></marker></defs>
+</svg>
+<div class="nm">串行</div>
+<div class="ds">上一步的产出是下一步的输入。<b>最常见</b>——纪要 → 待办 → 派活就是这种。</div>
+</div>
 
-上一步的产出是下一步的输入。纪要 → 待办 → 派活就是这种。
+<div class="ab-shape">
+<svg viewBox="0 0 220 100" role="img" aria-label="扇出扇入：A 分成三路再汇总到 C">
+<rect class="ab-svg-box" x="4" y="37" width="40" height="26" rx="7"/><text class="ab-svg-tx" x="24" y="51">A</text>
+<path class="ab-svg-line" d="M46 50 H66 M66 50 V16 H86 M66 50 H86 M66 50 V84 H86" marker-end="url(#ah2)"/>
+<rect class="ab-svg-box alt" x="88" y="4" width="44" height="24" rx="7"/><text class="ab-svg-tx" x="110" y="17">B1</text>
+<rect class="ab-svg-box alt" x="88" y="38" width="44" height="24" rx="7"/><text class="ab-svg-tx" x="110" y="51">B2</text>
+<rect class="ab-svg-box alt" x="88" y="72" width="44" height="24" rx="7"/><text class="ab-svg-tx" x="110" y="85">B3</text>
+<path class="ab-svg-line" d="M134 16 H154 V50 M134 50 H154 M134 84 H154 V50 M154 50 H172" marker-end="url(#ah2)"/>
+<rect class="ab-svg-box" x="174" y="37" width="42" height="26" rx="7"/><text class="ab-svg-tx" x="195" y="51">C</text>
+<defs><marker id="ah2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="currentColor" opacity=".55"/></marker></defs>
+</svg>
+<div class="nm">扇出 / 扇入</div>
+<div class="ds">一份材料分头处理再汇总。<b>每支任务单一、质量更稳</b>，还能并行。</div>
+</div>
 
-**扇出 / 扇入**
+<div class="ab-shape">
+<svg viewBox="0 0 220 100" role="img" aria-label="分支：判断后走两条不同的路">
+<rect class="ab-svg-box" x="4" y="37" width="40" height="26" rx="7"/><text class="ab-svg-tx" x="24" y="51">A</text>
+<path class="ab-svg-line" d="M46 50 H62" marker-end="url(#ah3)"/>
+<path class="ab-svg-box" d="M64 50 L86 34 L108 50 L86 66 z"/><text class="ab-svg-tx" x="86" y="51" style="font-size:9px">判断</text>
+<path class="ab-svg-line" d="M108 50 H124 V18 H142 M108 50 H124 V82 H142" marker-end="url(#ah3)"/>
+<rect class="ab-svg-box" x="144" y="6" width="40" height="24" rx="7"/><text class="ab-svg-tx" x="164" y="19">B</text>
+<path class="ab-svg-line" d="M186 18 H200" marker-end="url(#ah3)"/>
+<rect class="ab-svg-box" x="202" y="6" width="16" height="24" rx="6"/><text class="ab-svg-tx" x="210" y="19" style="font-size:9px">C</text>
+<rect class="ab-svg-box alt" x="144" y="70" width="40" height="24" rx="7"/><text class="ab-svg-tx" x="164" y="83">D</text>
+<defs><marker id="ah3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="currentColor" opacity=".55"/></marker></defs>
+</svg>
+<div class="nm">分支</div>
+<div class="ds">先判断是哪一类，再走不同的路。<b>判断要单独一步</b>，别和处理混在一起。</div>
+</div>
 
-```text
-        ┌→ B1 →┐
-A  →    ├→ B2 →┤  → C
-        └→ B3 →┘
-```
-
-一份材料，分别做三种处理，再汇总。比如：一份长报告 → 分别抽"数据""风险""结论" → 合成一份摘要。
-
-好处是每个分支的任务单一、质量更稳；也可以并行，快。
-
-**分支（带判断）**
-
-```text
-A → 判断 ┬ 是 → B → C
-         └ 否 → D
-```
-
-比如：先判断这份材料是会议记录还是需求文档，然后走不同的处理路径。
+</div>
+</figure>
 
 ::: tip 判断那一步要单独做
 别把"判断"和"处理"塞进同一步。让它先只回答"这是哪一类"（输出一个词），再由流程决定走哪条路。

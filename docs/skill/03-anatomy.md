@@ -141,16 +141,27 @@ meeting-notes/
 
 ## 一张图收口
 
-```text
-开机时                      触发后                    需要时
-┌──────────────┐          ┌──────────────┐        ┌──────────────┐
-│ name         │          │ 流程          │        │ TEMPLATES.md │
-│ description  │  ──匹配→ │ 模板          │ ──引用→│ EXAMPLES.md  │
-│ （几十个字）  │          │ 规则          │        │ scripts/     │
-│              │          │ 示例 / 清单   │        │              │
-└──────────────┘          └──────────────┘        └──────────────┘
-   一直占位              被触发才占位            读到才占位
-```
+<figure class="ab-fig">
+<p class="ab-dtitle">渐进式披露：用多少读多少</p>
+<div class="ab-tri">
+<div class="t-col">
+<div class="when">开机时 · 一直在</div>
+<ul><li><b>name</b></li><li><b>description</b></li><li>几十个字</li></ul>
+<div class="cost">一直占位，但极小</div>
+</div>
+<div class="t-col">
+<div class="when">被触发后才读</div>
+<ul><li>流程</li><li>输出模板</li><li>规则</li><li>示例 / 检查清单</li></ul>
+<div class="cost">匹配上了才占位</div>
+</div>
+<div class="t-col dim">
+<div class="when">正文提到、真需要才读</div>
+<ul><li>TEMPLATES.md</li><li>EXAMPLES.md</li><li>scripts/</li></ul>
+<div class="cost">读到才占位，不读不花钱</div>
+</div>
+</div>
+<figcaption>这就是你能同时装几十个 Skill 而不撑爆上下文的原因</figcaption>
+</figure>
 
 **你写 Skill 的功夫，应该按这个顺序分配：第 ① 层花的时间不比第 ② 层少。** 因为第 ② 层写得再好，第 ① 层没写对，它一次都不会被用上。
 

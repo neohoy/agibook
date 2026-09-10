@@ -520,3 +520,988 @@
     text-align: center;
   }
 }
+
+/* ===========================================================
+   正文视觉部件
+   —— 讲义那套装置搬进 Markdown：每个概念配一个视觉，而不是只有散文。
+   全部纯 CSS / 内联 SVG，跟随浅深色主题，不依赖图片资源。
+   =========================================================== */
+
+:root {
+  /* 语义色族：主色青绿之外，再给"下一步 / 注意 / 危险"各一支 */
+  --ab-violet: #5251c4;
+  --ab-violet-wash: #ecebfb;
+  --ab-amber: #a9742a;
+  --ab-amber-wash: #f5edde;
+  --ab-coral: #c0503a;
+  --ab-coral-wash: #f8e7e2;
+  --ab-ink-bar: #16191f;
+
+  /* 衬线标题 + 等宽标签：优先用本机已装的字体，不发网络请求 */
+  --ab-serif: "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN",
+    "Songti SC", "STSong", Georgia, serif;
+  --ab-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.dark {
+  --ab-violet: #a6a5ee;
+  --ab-violet-wash: rgba(82, 81, 196, 0.18);
+  --ab-amber: #d9ac63;
+  --ab-amber-wash: rgba(169, 116, 42, 0.18);
+  --ab-coral: #e08974;
+  --ab-coral-wash: rgba(192, 80, 58, 0.18);
+  --ab-ink-bar: #23262d;
+}
+
+/* ---------- 版式：标题换衬线，标签换等宽 ---------- */
+.vp-doc h1,
+.vp-doc h2 {
+  font-family: var(--ab-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.vp-doc h1 {
+  font-size: 32px;
+  line-height: 1.25;
+}
+@media (min-width: 768px) {
+  .vp-doc h1 {
+    font-size: 36px;
+  }
+}
+
+/* ---------- 图例外框：所有视觉装置共用 ---------- */
+.ab-fig {
+  margin: 28px 0;
+}
+.ab-fig > figcaption,
+.ab-fig .ab-cap {
+  margin-top: 10px;
+  font-family: var(--ab-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-text-3);
+  text-align: center;
+}
+.ab-lbl {
+  font-family: var(--ab-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  margin-bottom: 12px;
+}
+
+/* ===========================================================
+   1 · 流程块：输入 → 引擎 → 输出
+   =========================================================== */
+.ab-flow {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  padding: 22px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-flow .node {
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.ab-flow .in {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+}
+.ab-flow .engine {
+  background: var(--ab-ink-bar);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid var(--ab-ink-bar);
+}
+.ab-flow .engine b {
+  font-family: var(--ab-serif);
+  font-weight: 700;
+  font-size: 19px;
+  display: block;
+}
+.ab-flow .engine span {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 7px;
+}
+.ab-flow .out {
+  background: var(--vp-c-brand-soft);
+  border: 1px solid var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+.ab-flow .arrow {
+  text-align: center;
+  color: var(--vp-c-text-3);
+  font-size: 15px;
+  padding: 8px 0;
+  line-height: 1;
+}
+.ab-flow .arrow::before {
+  content: "▼";
+}
+
+/* ===========================================================
+   2 · 窗口图：一个框，里面分层堆着，底下是溢出区
+       用于「上下文窗口装了什么、谁被挤出去」这类结构图
+   =========================================================== */
+.ab-diagram {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.ab-diagram.solo {
+  grid-template-columns: minmax(0, 1fr);
+}
+.ab-diagram > .col {
+  min-width: 0;
+}
+.ab-dtitle {
+  font-family: var(--ab-serif);
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  margin: 0 0 16px;
+  color: var(--vp-c-text-1);
+}
+
+/* 窗口框 */
+.ab-win {
+  border: 2px solid var(--vp-c-text-3);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-win > .cap {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--vp-c-text-1);
+  margin-bottom: 12px;
+}
+.ab-layer {
+  border: 1.5px solid var(--c, var(--vp-c-brand-1));
+  border-radius: 9px;
+  padding: 11px 14px;
+  margin-bottom: 9px;
+  background: var(--vp-c-bg);
+}
+.ab-layer:last-child {
+  margin-bottom: 0;
+}
+.ab-layer b {
+  color: var(--c, var(--vp-c-brand-1));
+  font-weight: 700;
+  font-size: 14.5px;
+}
+.ab-layer i {
+  font-style: normal;
+  font-size: 13.5px;
+  color: var(--vp-c-text-2);
+  margin-left: 6px;
+}
+.ab-layer em {
+  display: block;
+  font-style: normal;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--c, var(--vp-c-text-3));
+  margin-top: 5px;
+  opacity: 0.92;
+}
+.ab-layer.spill {
+  border-style: dashed;
+  background: transparent;
+  text-align: center;
+  color: var(--c);
+  font-size: 13px;
+  padding: 12px 14px;
+}
+/* 五支配色，跟正文的语义色族对齐 */
+.ab-layer.k1 { --c: var(--vp-c-brand-1); }
+.ab-layer.k2 { --c: var(--ab-violet); }
+.ab-layer.k3 { --c: var(--ab-amber); }
+.ab-layer.k4 { --c: #7a5cc4; }
+.ab-layer.k5 { --c: var(--ab-coral); }
+
+/* 右侧解释卡 */
+.ab-side h4 {
+  margin: 0 0 11px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+.ab-side h4 + .ab-note {
+  margin-top: 0;
+}
+.ab-side > * + h4 {
+  margin-top: 22px;
+}
+.ab-note {
+  border: 1px solid var(--c, var(--vp-c-divider));
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  background: var(--vp-c-bg-soft);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+  text-align: center;
+}
+.ab-note b {
+  display: block;
+  color: var(--c, var(--vp-c-text-1));
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.ab-note.k1 { --c: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); }
+.ab-note.k2 { --c: var(--ab-violet); background: var(--ab-violet-wash); }
+.ab-note.k3 { --c: var(--ab-amber); background: var(--ab-amber-wash); }
+.ab-note.k5 { --c: var(--ab-coral); background: var(--ab-coral-wash); }
+.ab-note.plain { --c: var(--vp-c-divider); }
+.ab-note.key {
+  --c: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+  font-size: 14px;
+}
+
+/* ===========================================================
+   3 · 壳卡片：同一个模型，套不同的壳
+   =========================================================== */
+.ab-bar {
+  background: var(--ab-ink-bar);
+  color: #fff;
+  border-radius: 14px;
+  padding: 15px 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.ab-bar .k {
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  flex: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+  padding-right: 20px;
+}
+.ab-bar .v {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+.ab-bar .v b {
+  color: #fff;
+}
+.ab-down {
+  text-align: center;
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--vp-c-text-3);
+  padding: 12px 0;
+}
+.ab-down::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 14px;
+  background: var(--vp-c-divider);
+  margin: 6px auto 0;
+}
+
+.ab-shells {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ab-shell {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: var(--vp-c-bg);
+}
+.ab-shell .ico {
+  flex: none;
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.ab-shell.c1 .ico {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+.ab-shell.c2 .ico {
+  background: var(--ab-violet-wash);
+  color: var(--ab-violet);
+}
+.ab-shell.c3 .ico {
+  background: var(--ab-amber-wash);
+  color: var(--ab-amber);
+}
+.ab-shell .bd strong {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin-bottom: 3px;
+}
+.ab-shell .bd span {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+
+/* ===========================================================
+   4 · 概念卡网格：四个概念并排
+   =========================================================== */
+.ab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.ab-grid.c3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.ab-c {
+  position: relative;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 18px 20px 18px 22px;
+  background: var(--vp-c-bg);
+  overflow: hidden;
+}
+.ab-c::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--vp-c-brand-1);
+}
+.ab-c.v2::before {
+  background: var(--ab-violet);
+}
+.ab-c.v3::before {
+  background: var(--ab-amber);
+}
+.ab-c.v4::before {
+  background: var(--ab-coral);
+}
+.ab-c .n {
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--vp-c-text-3);
+}
+.ab-c .t {
+  font-family: var(--ab-serif);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 5px 0 2px;
+  color: var(--vp-c-brand-1);
+}
+.ab-c.v2 .t {
+  color: var(--ab-violet);
+}
+.ab-c.v3 .t {
+  color: var(--ab-amber);
+}
+.ab-c.v4 .t {
+  color: var(--ab-coral);
+}
+.ab-c .zh {
+  font-size: 12.5px;
+  color: var(--vp-c-text-3);
+  display: block;
+  margin-bottom: 10px;
+}
+.ab-c .d {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+.ab-c .d b {
+  color: var(--vp-c-text-1);
+}
+.ab-c .foot {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--vp-c-divider);
+  font-size: 12.5px;
+  color: var(--vp-c-text-3);
+}
+
+/* ===========================================================
+   5 · 步骤条：01 02 03 横排
+   =========================================================== */
+.ab-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  counter-reset: abs;
+}
+.ab-steps.c3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.ab-steps.c5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.ab-step {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 18px 16px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-step::before {
+  counter-increment: abs;
+  content: "0" counter(abs);
+  display: block;
+  font-family: var(--ab-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 9px;
+  font-variant-numeric: tabular-nums;
+}
+.ab-step.now {
+  background: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+.ab-step.now::before {
+  color: rgba(255, 255, 255, 0.75);
+}
+.ab-step.now h4,
+.ab-step.now p,
+.ab-step.now .when {
+  color: #fff;
+}
+.ab-step.far {
+  background: transparent;
+  border-style: dashed;
+}
+.ab-step h4 {
+  margin: 0 0 5px;
+  font-family: var(--ab-serif);
+  font-weight: 700;
+  font-size: 16.5px;
+  line-height: 1.25;
+  color: var(--vp-c-text-1);
+}
+.ab-step p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+.ab-step .when {
+  display: block;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--vp-c-divider);
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-text-3);
+}
+.ab-step.now .when {
+  border-top-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ===========================================================
+   6 · 对照：含糊地说 vs 说清楚
+   =========================================================== */
+.ab-vs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.ab-vs > div {
+  border-radius: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--vp-c-divider);
+}
+.ab-vs .bad {
+  background: var(--vp-c-bg-soft);
+}
+.ab-vs .good {
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand-1);
+}
+.ab-vs .tag {
+  display: inline-block;
+  font-family: var(--ab-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 11px;
+}
+.ab-vs .bad .tag {
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-3);
+}
+.ab-vs .good .tag {
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-bg);
+}
+.ab-vs p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.ab-vs p:last-child {
+  margin-bottom: 0;
+}
+.ab-vs .bad p {
+  color: var(--vp-c-text-3);
+}
+.ab-vs .good p {
+  color: var(--vp-c-text-1);
+}
+.ab-vs code {
+  font-size: 13px;
+}
+
+/* ===========================================================
+   7 · 面板 + 键值行（右栏那种小卡）
+   =========================================================== */
+.ab-panel {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 18px 20px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-panel.teal {
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand-1);
+}
+.ab-panel.coral {
+  background: var(--ab-coral-wash);
+  border-color: var(--ab-coral);
+}
+.ab-panel.amber {
+  background: var(--ab-amber-wash);
+  border-color: var(--ab-amber);
+}
+.ab-panel > .pt {
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  margin-bottom: 12px;
+}
+.ab-panel.teal > .pt {
+  color: var(--vp-c-brand-1);
+}
+.ab-panel.coral > .pt {
+  color: var(--ab-coral);
+}
+.ab-panel.amber > .pt {
+  color: var(--ab-amber);
+}
+.ab-kv {
+  display: flex;
+  gap: 14px;
+  padding: 10px 0;
+  border-top: 1px dashed var(--vp-c-divider);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.ab-kv:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+.ab-kv .k {
+  flex: none;
+  width: 92px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+.ab-kv .v {
+  color: var(--vp-c-text-2);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+  .ab-grid,
+  .ab-grid.c3,
+  .ab-vs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ab-steps,
+  .ab-steps.c3,
+  .ab-steps.c5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ab-diagram {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ab-bar {
+    gap: 12px;
+  }
+  .ab-bar .k {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 0 0 10px;
+    width: 100%;
+  }
+  .ab-kv {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .ab-kv .k {
+    width: auto;
+  }
+}
+
+/* ===========================================================
+   8 · 流水线：编号节点 + 带说明的箭头
+   =========================================================== */
+.ab-pipe {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  padding: 24px 22px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-pipe .p-node {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 11px;
+  padding: 13px 16px;
+  background: var(--vp-c-bg);
+}
+.ab-pipe .p-node .num {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--ab-mono);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+.ab-pipe .p-node .tx {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--vp-c-text-1);
+}
+.ab-pipe .p-node.last {
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand-1);
+}
+.ab-pipe .p-node.last .num {
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-bg);
+}
+.ab-pipe .p-act {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0 9px 12px;
+  margin-left: 12px;
+  border-left: 2px dashed var(--vp-c-divider);
+}
+.ab-pipe .p-act .op {
+  font-family: var(--ab-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  border-radius: 7px;
+  padding: 5px 11px;
+  white-space: nowrap;
+}
+.ab-pipe .p-act .hint {
+  font-size: 12.5px;
+  color: var(--vp-c-text-3);
+  line-height: 1.6;
+}
+.ab-pipe .p-act.human .op {
+  color: var(--ab-amber);
+  background: var(--ab-amber-wash);
+}
+
+/* ===========================================================
+   9 · 循环：Agent 的一圈
+   =========================================================== */
+.ab-loop {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  padding: 22px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-loop .goal {
+  text-align: center;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+  padding-bottom: 14px;
+}
+.ab-loop .ring {
+  border: 2px dashed var(--vp-c-brand-1);
+  border-radius: 14px;
+  padding: 16px;
+  position: relative;
+}
+.ab-loop .ring::after {
+  content: "↻ 没完成就回到第 ① 步";
+  position: absolute;
+  left: 50%;
+  bottom: -11px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  padding: 0 10px;
+}
+.ab-loop .ls {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 10px 0;
+}
+.ab-loop .ls + .ls {
+  border-top: 1px dashed var(--vp-c-divider);
+}
+.ab-loop .ls .n {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--ab-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-bg);
+  margin-top: 1px;
+}
+.ab-loop .ls b {
+  font-size: 14.5px;
+  color: var(--vp-c-text-1);
+}
+.ab-loop .ls span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+  margin-top: 2px;
+}
+.ab-loop .done {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+}
+
+/* ===========================================================
+   10 · 三段渐进：开机 / 触发 / 需要时
+   =========================================================== */
+.ab-tri {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+.ab-tri .t-col {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--vp-c-bg);
+  display: flex;
+  flex-direction: column;
+}
+.ab-tri .t-col .when {
+  font-family: var(--ab-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 10px;
+}
+.ab-tri .t-col.dim {
+  background: var(--vp-c-bg-soft);
+  border-style: dashed;
+}
+.ab-tri .t-col.dim .when {
+  color: var(--vp-c-text-3);
+}
+.ab-tri .t-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  flex: 1;
+}
+.ab-tri .t-col li {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--vp-c-text-2);
+}
+.ab-tri .t-col li b {
+  color: var(--vp-c-text-1);
+}
+.ab-tri .t-col .cost {
+  padding-top: 10px;
+  border-top: 1px dashed var(--vp-c-divider);
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+
+/* ===========================================================
+   11 · 阶梯：四个阶段，每级之间有一句「为什么还要往上」
+   =========================================================== */
+.ab-ladder {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  padding: 22px;
+  background: var(--vp-c-bg-soft);
+}
+.ab-ladder .rung {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  border-radius: 11px;
+  padding: 13px 16px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  flex-wrap: wrap;
+}
+.ab-ladder .rung .st {
+  font-family: var(--ab-mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--vp-c-brand-1);
+  flex: none;
+}
+.ab-ladder .rung .nm {
+  font-family: var(--ab-serif);
+  font-weight: 700;
+  font-size: 16.5px;
+  color: var(--vp-c-text-1);
+  flex: none;
+}
+.ab-ladder .rung .tm {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+  margin-left: auto;
+}
+.ab-ladder .why {
+  padding: 9px 0 9px 18px;
+  margin-left: 16px;
+  border-left: 2px solid var(--vp-c-divider);
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+.ab-ladder .why::before {
+  content: "↓ ";
+  color: var(--vp-c-brand-1);
+}
+
+/* ===========================================================
+   12 · 形状图：串行 / 扇出 / 分支（内联 SVG）
+   =========================================================== */
+.ab-shapes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.ab-shape {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--vp-c-bg-soft);
+  text-align: center;
+}
+.ab-shape svg {
+  width: 100%;
+  height: auto;
+  max-width: 220px;
+  display: block;
+  margin: 0 auto 12px;
+}
+.ab-shape .nm {
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--vp-c-text-1);
+  margin-bottom: 4px;
+}
+.ab-shape .ds {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+.ab-svg-box {
+  fill: var(--vp-c-bg);
+  stroke: var(--vp-c-brand-1);
+  stroke-width: 1.5;
+}
+.ab-svg-box.alt {
+  stroke: var(--ab-violet);
+}
+.ab-svg-line {
+  stroke: var(--vp-c-text-3);
+  stroke-width: 1.5;
+  fill: none;
+}
+.ab-svg-tx {
+  fill: var(--vp-c-text-1);
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+@media (max-width: 720px) {
+  .ab-tri,
+  .ab-shapes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ab-ladder .rung .tm {
+    margin-left: 0;
+    width: 100%;
+  }
+}

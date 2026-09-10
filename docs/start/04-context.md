@@ -12,18 +12,33 @@
 
 每次你发一条消息，桌上其实摆着这么几摞东西：
 
-```text
-┌─ 上下文窗口 ───────────────────────────────┐
-│  1. System Prompt      入职时约法三章的那段  │
-│  2. 对话历史            前面所有轮的一问一答  │
-│  3. 你贴进来的资料      文档、代码、表格      │
-│  4. 检索来的内容        RAG 抓回来的片段      │
-│  5. 工具返回的结果      联网搜索、查数据库    │
-│  6. 你这一句            刚敲的这条            │
-│  ------------------------------------------ │
-│  7. 它这次的输出        也占地方              │
-└────────────────────────────────────────────┘
-```
+<figure class="ab-fig">
+<p class="ab-dtitle">上下文窗口：它一次能「看见」多少</p>
+<div class="ab-diagram">
+<div class="col">
+<div class="ab-win">
+<div class="cap">上下文窗口</div>
+<div class="ab-layer k1"><b>System Prompt</b><i>入职时约法三章的那段</i><em>设一次，之后每一轮都会被重新发一遍</em></div>
+<div class="ab-layer k2"><b>你贴进来的资料</b><i>文档、代码、表格</i><em>最占地方的一摞，也最容易把别的挤掉</em></div>
+<div class="ab-layer k3"><b>检索来的内容</b><i>RAG 抓回来的片段</i><em>整本手册塞不进来，只能挑相关的几段</em></div>
+<div class="ab-layer k4"><b>工具返回的结果</b><i>联网搜索、查数据库</i><em>Agent 每转一圈就往上堆一层</em></div>
+<div class="ab-layer k5"><b>对话历史 + 你这一句</b><i>前面所有轮的一问一答</i><em>聊得越久越占地方，最早的会被「挤出去」</em></div>
+<div class="ab-layer spill k5">溢出区：最早的内容被挤出去，它就「忘」了</div>
+</div>
+<p class="ab-cap">还有第七样：它这次的输出，同样占地方</p>
+</div>
+<div class="col ab-side">
+<h4>窗口满了会怎样</h4>
+<div class="ab-note k5"><b>聊久了就跑偏</b>最早那几轮被挤出去，你开头定的规矩等于没说过</div>
+<div class="ab-note k3"><b>资料塞不下</b>放不进去就只能先检索，这就是 RAG 要解决的事</div>
+<div class="ab-note k2"><b>例子不能无限加</b>示例越多越占地方，留给对话的空间就越少</div>
+<h4>窗口越大越好吗</h4>
+<div class="ab-note plain">窗口越大 → 越贵、越慢</div>
+<div class="ab-note plain">超长上下文里，<b style="display:inline">中间</b>的内容最容易被读漏</div>
+<div class="ab-note key">关键不是窗口多大，是里面放了什么</div>
+</div>
+</div>
+</figure>
 
 七样东西挤一个空间。你贴的资料越长，留给对话历史的地方越小。
 
